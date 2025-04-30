@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kamu yang Spesial</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            color: #e75480;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 20px;
+        }
+        
+        p {
+            color: #333;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .highlight {
+            color: #e75480;
+            font-weight: bold;
+        }
+        
+        .heart {
+            color: #e75480;
+            font-size: 2rem;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #e75480;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            text-decoration: none;
+        }
+        
+        .button:hover {
+            background-color: #d6436f;
+            transform: scale(1.05);
+        }
+        
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .heart-float {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: float 10s linear infinite;
+            opacity: 0.5;
+            color: #e75480;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 0.7; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+        
+        #message {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff8f8;
+            border-radius: 10px;
+            border-left: 5px solid #e75480;
+        }
+        
+        .photo {
+            width: 150px;
+            height: 150px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+        }
+        @media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .photo {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div class="photo">
+            <img src="kii.jpg" alt="Kita Berdua">
+        </div>
+        
+        <h1>di woco</h1>
+        
+        <p>litt,,,,pisan wae cubo ayo  kyo wingiii,aku njalukk maap tenan lek seng aku marai wm isin kaee,,yayaya kyo wingi-wingi seng sak urung e yaaaa</p>
+        
+        <p>ra iso lek ora kyo mbien <span class="highlight">kadong kejeronn</span>plissssss...</p>
+        
+        <p>#kejeron#kuduiso</p>
+        
+        <p><span class="heart">❤</span> <span class="highlight" style="font-size: 1.5rem;">kadong seneng bangett</span> <span class="heart">❤</span></p>
+        
+        <p>baleni koyo wingi yaaaa</p>
+        
+        <div>
+            <button class="button" id="btnYes">Ya</button>
+            <button class="button" id="btnNo">Tidak</button>
+        </div>
+        
+        <div id="message"></div>
+    </div>
+    
+    <script>
+        // Membuat hati yang mengambang
+        const heartsContainer = document.getElementById('hearts');
+        for (let i = 0; i < 50; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart-float';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            heart.style.animationDelay = (Math.random() * 5) + 's';
+            heart.innerHTML = ['❤', '♥', '💕', '💓', '💗'][Math.floor(Math.random() * 5)];
+            heartsContainer.appendChild(heart);
+        }
+        
+        // Fungsi untuk menampilkan pesan
+        function showMessage(answer) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'block';
+            
+            if (answer === 'Ya') {
+                messageDiv.innerHTML = '<p style="font-size: 1.3rem; color: #e75480;"><strong>suwun janji ra mbaleni kyo wingiiiii❤️</p>';
+                // Tambahkan efek konfeti
+                createConfetti();
+            } else {
+                messageDiv.innerHTML = '<p>Tidak apa-apa, aku mengerti. Aku tetap menghargai kejujuranmu dan persahabatan kita. Semoga kamu selalu bahagia.</p>';
+            }
+        }
+        
+        // Fungsi untuk konfeti
+        function createConfetti() {
+            const colors = ['#e75480', '#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.opacity = 1;
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                confetti.style.transition = 'all ' + (Math.random() * 3 + 2) + 's ease';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.style.top = '100vh';
+                    confetti.style.opacity = 0;
+                }, 10);
+                
+                setTimeout(() => {
+                    document.body.removeChild(confetti);
+                }, 5000);
+            }
+        }
+        
+        // Fungsi untuk memindahkan tombol "Tidak"
+        function moveButton() {
+            const noButton = document.getElementById('btnNo');
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            
+            const maxX = containerRect.width - noButton.offsetWidth - 20;
+            const maxY = containerRect.height - noButton.offsetHeight - 20;
+            
+            const randomX = Math.max(0, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(0, Math.floor(Math.random() * maxY));
+            
+            noButton.style.position = 'absolute';
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+        }
+        
+        // Menambahkan event listener
+        document.getElementById('btnYes').addEventListener('click', function() {
+            showMessage('Ya');
+        });
+        
+        document.getElementById('btnNo').addEventListener('mouseover', moveButton);
+        document.getElementById('btnNo').addEventListener('click', function() {
+            showMessage('Tidak');
+        });
+    </script>
+</body>
+</html>
